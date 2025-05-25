@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Employee</title>
+  <link rel="stylesheet" type="text/css" href="view.css">
+  <link rel="stylesheet" type="text/css" href="00-nav.css">
+  <script src="00-nav.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="02-dashboard.html" class="logo"><img src="bpclogo.png" alt="Company Logo"></a>
+      <h1 id="school" style="user-select: none;">BULACAN POLYTECHNIC COLLEGE</h1>
+      <ul class="mainMenu">
+        <li><a href="02-dashboard.html">HOME</a></li>
+        <li class=""><a href="04-manage.html">MANAGE EMPLOYEES</a></li>
+        <li><a href="06-attendance.html">ATTENDANCE</a></li>
+        <li><a href="05-calculation.html">PAYROLL</a></li>
+        <li><a href="07-profile.html">PROFILE</a></li>
+      </ul>
+      <div class="tootle-menu" onclick="toggleMenu()">
+        &#9776;
+      </div>
+    </nav>
+  </header>
+  <div class="view">
+    <h1>MANAGE EMPLOYEES</h1>
+    <h4>Employee List: </h4>
+    <div class="container-table scrollable-table">
+      <table id="employeeTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Job Designation</th>
+            <th>Department</th>
+            <th>Daily Rate</th>
+            <th style="text-align:center;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+      </table>
+    </div>
+    <button id="back-btn" onclick="goBack()">Back</button>
+  </div>
+  <footer class="bpc-footer">
+  <div class="footer-container">
+    <div class="footer-column logo-section">
+      <img src="bpclogo.png" alt="BPC Logo" class="bpc-logo" />
+    </div>
+
+    <div class="footer-column">
+      <h3>Social Links</h3>
+      <ul>
+        <li><i class='bx bxl-facebook-circle'></i> Facebook</li>
+        <li><i class='bx bxl-youtube'></i> Youtube</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Supports</h3>
+      <ul>
+        <li><i class='bx bx-right-arrow-circle'></i> FAQS</li>
+        <li><i class='bx bx-right-arrow-circle'></i> Privacy</li>
+        <li><i class='bx bx-right-arrow-circle'></i> Policies</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <ul>
+        <li><i class='bx bx-map'></i> Bulihan, City of Malolos, Bulacan</li>
+        <li><i class='bx bx-phone'></i> (044) 802 6716 / (044) 796 2306</li>
+        <li><i class='bx bx-envelope'></i> communications@bpc.edu.ph</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2024 Bulacan Polytechnic College. All rights reserved.</p>
+  </div>
+</footer>
+  <script>
+    // For demo: If there's no data, create some sample data
+    if (!localStorage.getItem("employeeData")) {
+      localStorage.setItem("employeeData", JSON.stringify([
+        { name: "Juan Dela Cruz", job: "Instructor I", dep: "IT", daily: 800 },
+        { name: "Maria Santos", job: "Instructor II", dep: "Business", daily: 900 },
+        { name: "Pedro Reyes", job: "Clerk", dep: "Registrar", daily: 700 },
+        { name: "Ana Lopez", job: "Instructor I", dep: "Engineering", daily: 850 }
+      ]));
+    }
+
+    const employeeData = JSON.parse(localStorage.getItem("employeeData"));
+    const tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = ""; // Clear existing rows
+
+    employeeData.forEach((employee, index) => {
+      const newRow = tableBody.insertRow();
+      newRow.innerHTML = `
+        <td>${employee.name}</td>
+        <td>${employee.job}</td>
+        <td>${employee.dep}</td>
+        <td>${employee.daily}</td>
+        <td style="text-align: center;">
+          <button class="edit-btn" onclick="editEmployee(${index})">Edit</button>
+          <button class="delete-btn" onclick="deleteEmployee(${index})">Delete</button>
+        </td>
+      `;
+    });
+
+    function goBack() {
+      window.location.href = "04-manage.html";
+    }
+
+    function editEmployee(index) {
+      const employee = employeeData[index];
+      const editForm = document.createElement('div');
+      editForm.className = 'edit-form';
+      editForm.innerHTML = `
+        <div class="edit-form-content">
+          <h2 style="margin-bottom: 5px; text-align: center;">Edit Employee</h2>
+          <label><b>Name:</b></label><br>
+          <input type="text" id="edit-name" value="${employee.name}"><br>
+          <label>Job Designation:</label><br>
+          <input type="text" id="edit-job" value="${employee.job}"><br>
+          <label>Department:</label><br>
+          <input type="text" id="edit-dep" value="${employee.dep}"><br>
+          <label>Daily Rate:</label><br>
+          <input type="number" id="edit-daily" value="${employee.daily}"><br>
+          <div class="act-btn">
+            <button onclick="saveEdit(${index})" class="save-btn">Save</button>
+            <button onclick="cancelEdit()" class="cancel-btn">Cancel</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(editForm);
+    }
+
+    function saveEdit(index) {
+      const newName = document.getElementById("edit-name").value;
+      const newJob = document.getElementById("edit-job").value;
+      const newDep = document.getElementById("edit-dep").value;
+      const newDaily = document.getElementById("edit-daily").value;
+
+      if (newName && newJob && newDep && newDaily) {
+        employeeData[index] = {
+          name: newName,
+          job: newJob,
+          dep: newDep,
+          daily: newDaily
+        };
+        localStorage.setItem("employeeData", JSON.stringify(employeeData));
+        cancelEdit();
+        window.location.reload();
+      } else {
+        alert("Please fill out all fields");
+      }
+    }
+
+    function cancelEdit() {
+      const form = document.querySelector('.edit-form');
+      if (form) form.remove();
+    }
+
+    function deleteEmployee(index) {
+      if (confirm("Are you sure you want to Discard this employee?")) {
+        employeeData.splice(index, 1);
+        localStorage.setItem("employeeData", JSON.stringify(employeeData));
+        window.location.reload();
+      }
+    }
+  </script>
+</body>
+</html>

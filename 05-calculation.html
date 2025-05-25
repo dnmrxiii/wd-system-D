@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation</title>
+    <link rel="stylesheet" href="00-nav.css">
+    <link rel="stylesheet" href="05-calculation.css">
+    <script src="00-nav.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="02-dashboard.html" class="logo"><img src="bpclogo.png" alt="Company Logo"></a>
+            <h1 id="school" style="user-select: none;">BULACAN POLYTECHNIC COLLEGE</h1>
+            <ul class="mainMenu">
+                <li><a href="02-dashboard.html">HOME</a></li>
+                <li><a href="04-manage.html">MANAGE EMPLOYEES</a></li>
+                <li><a href="06-attendance.html">ATTENDANCE</a></li>
+                <li class="active"><a href="05-calculation.html">PAYROLL</a></li>
+                <li><a href="07-profile.html">PROFILE</a></li>
+            </ul>
+            <div class="tootle-menu" onclick="toggleMenu()">
+                &#9776;
+            </div>
+        </nav>
+    </header>
+
+    <div class="buttons">
+        <a href="05-calculation.html" id="active">SALARY CALCULATION</a>
+        <a href="bank-info.html">BANK & TAX INFO</a>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <form id="salary-form">
+                <h2>SALARY CALCULATION</h2>
+                <div class="form-group">
+                    <input type="text" id="employee" name="employee" placeholder="Employee Name" required>
+                    <input type="number" id="daysworked" name="daysworked" placeholder="Days Worked" required>
+                    <input type="number" id="dailyrate" name="dailyrate" placeholder="Daily Rate" required>
+                    <input type="number" id="deductionPercentage" name="deductionPercentage" placeholder="Deduction Percentage" required>
+                </div>
+                <button type="button" class="calculate-button" onclick="calculate()">Calculate</button>
+            </form>
+        </div>
+
+        <div id="payslip-container" class="payslip-container" style="display: none;">
+            <div id="payslip-content"></div>
+            <button type="button" class="download-button" onclick="downloadPayslip()">Download Payslip</button>
+            <button type="button" class="back-button" onclick="hidePayslip()">Back</button>
+        </div>
+    </div>
+    <footer class="bpc-footer">
+  <div class="footer-container">
+    <div class="footer-column logo-section">
+      <img src="bpclogo.png" alt="BPC Logo" class="bpc-logo" />
+    </div>
+
+    <div class="footer-column">
+      <h3>Social Links</h3>
+      <ul>
+        <li><i class='bx bxl-facebook-circle'></i> Facebook</li>
+        <li><i class='bx bxl-youtube'></i> Youtube</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Supports</h3>
+      <ul>
+        <li><i class='bx bx-right-arrow-circle'></i> FAQS</li>
+        <li><i class='bx bx-right-arrow-circle'></i> Privacy</li>
+        <li><i class='bx bx-right-arrow-circle'></i> Policies</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <ul>
+        <li><i class='bx bx-map'></i> Bulihan, City of Malolos, Bulacan</li>
+        <li><i class='bx bx-phone'></i> (044) 802 6716 / (044) 796 2306</li>
+        <li><i class='bx bx-envelope'></i> communications@bpc.edu.ph</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2024 Bulacan Polytechnic College. All rights reserved.</p>
+  </div>
+</footer>
+
+    <script>
+        function calculate() {
+            const employeeName = document.getElementById('employee').value;
+            const daysWorked = parseFloat(document.getElementById('daysworked').value);
+            const dailyRate = parseFloat(document.getElementById('dailyrate').value);
+            const deductionPercentage = parseFloat(document.getElementById('deductionPercentage').value);
+
+            if (isNaN(daysWorked) || isNaN(dailyRate) || isNaN(deductionPercentage)) {
+                alert("Please enter valid numbers for all fields.");
+                return;
+            }
+
+            const grossSalary = daysWorked * dailyRate;
+            const deductionAmount = (deductionPercentage / 100) * grossSalary;
+            const netSalary = grossSalary - deductionAmount;
+
+            function formatNumberWithCommas(number) {
+                return number.toLocaleString('en-US');
+            }
+
+            const formattedGrossSalary = formatNumberWithCommas(grossSalary.toFixed(2));
+            const formattedDeductionAmount = formatNumberWithCommas(deductionAmount.toFixed(2));
+            const formattedNetSalary = formatNumberWithCommas(netSalary.toFixed(2));
+
+            let payslipHTML = `
+                <h2>PAYSLIP</h2>
+                <p><strong>Employee:</strong> ${employeeName}</p>
+                <p><strong>Days Worked:</strong> ${daysWorked}</p>
+                <p><strong>Daily Rate:</strong> ₱ ${formatNumberWithCommas(dailyRate.toFixed(2))}</p>
+                <p><strong>Gross Salary:</strong> ₱ ${formattedGrossSalary}</p>
+                <p><strong>Deduction (${deductionPercentage}%):</strong> ₱ ${formattedDeductionAmount}</p>
+                <p><strong>Net Salary:</strong> ₱ ${formattedNetSalary}</p>
+            `;
+
+            document.getElementById('payslip-content').innerHTML = payslipHTML;
+            document.getElementById('payslip-container').style.display = 'flex';
+            document.getElementById('container').style.display = 'none';
+        }
+
+        function downloadPayslip() {
+            const payslipContent = document.getElementById('payslip-content').innerHTML;
+            const employeeName = document.getElementById('employee').value;
+            const blob = new Blob([payslipContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `payslip_${employeeName}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function hidePayslip() {
+            document.getElementById('payslip-container').style.display = 'none';
+            document.getElementById('container').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>

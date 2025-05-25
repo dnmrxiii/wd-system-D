@@ -1,0 +1,347 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+}
+
+html, body {
+  height: 100%;
+  background-color: #f9f9f9;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  flex: 1 0 auto;
+}
+
+#school {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.2rem;
+  user-select: none;
+  color: #fff;
+  font-weight: 700;
+}
+
+.tootle-menu {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+  margin-left: auto;
+  color: white;
+}
+
+.view {
+  flex: 1 0 auto;
+  max-width: 960px;
+  margin: 30px auto;
+  background: linear-gradient(to bottom, #0B6623, #16CC46);
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+
+.view h1 {
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.view h4 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.container-table {
+  overflow-x: auto;
+  margin-bottom: 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  background-color: darkgreen;
+  color: blue;
+  font-size: 0.95rem;
+}
+
+thead {
+  background-color: gold;
+  color: black;
+}
+
+th, td {
+  padding: 12px 15px;
+  border: 1px solid gray;
+  text-align: left;
+}
+
+th:last-child,
+td:last-child {
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 7px 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+#back-btn {
+  background-color: gold;
+  color: white;
+  display: inline-block;
+  margin-top: 10px;
+  width: 120px;
+  text-align: center;
+}
+
+#back-btn:hover {
+  background-color: yellowgreen;
+}
+
+.edit-btn {
+  background-color: gold;
+  color: white;
+  margin-right: 8px;
+}
+
+.edit-btn:hover {
+  background-color: #3a8a37;
+}
+
+.delete-btn {
+  background-color: #e53935;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #ab2d28;
+}
+
+.edit-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.edit-form-content {
+  background: linear-gradient(to bottom, #0B6623, #16CC46);
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  color: white;
+}
+
+.edit-form-content h2 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.edit-form-content label {
+  font-weight: 600;
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.edit-form-content input[type="text"],
+.edit-form-content input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.edit-form-content input[type="text"]:focus,
+.edit-form-content input[type="number"]:focus {
+  border-color: #0073e6;
+  outline: none;
+}
+
+.act-btn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-btn {
+  background-color: gold;
+  color: white;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.save-btn:hover {
+  background-color: gold;
+}
+
+.cancel-btn {
+  background-color: red;
+  color: white;
+  flex: 1;
+}
+
+.cancel-btn:hover {
+  background-color: #555;
+}
+
+.bpc-footer {
+  flex-shrink: 0;
+  background-color: #0d6217;
+  color: white;
+  padding: 50px 20px 20px;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  gap: 30px;
+}
+
+.footer-column {
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+
+.footer-column h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: white;
+}
+
+.footer-column i {
+  font-size: 20px;
+  color: #ffeb3b;
+  user-select: none;
+}
+
+.logo-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bpc-logo {
+  max-width: 110px;
+  height: auto;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 15px;
+  font-size: 0.9rem;
+  color: #ddd;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .tootle-menu {
+    display: block;
+    margin-left: auto;
+  }
+
+  .mainMenu {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    margin-top: 10px;
+    background-color: #0B6623;
+    border-radius: 5px;
+    padding: 10px 0;
+  }
+
+  .mainMenu.active {
+    display: flex;
+  }
+
+  #school {
+    flex-basis: 100%;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+
+  .container-table {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 100%;
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 8px 10px;
+  }
+
+  .edit-btn, .delete-btn {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+
+  #back-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-column {
+    min-width: auto;
+    flex: none;
+  }
+
+  .bpc-logo {
+    max-width: 90px;
+  }
+}
+

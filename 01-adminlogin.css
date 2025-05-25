@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background:#ffffff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  
+}
+
+.login-box {
+  background: linear-gradient(to bottom right, #43a047, #2e7d32);
+  padding: 30px 40px;
+  border-radius: 15px;
+  width: 320px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+.login-box input::placeholder {
+  color: #888;
+}
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffeb3b;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-box button:hover {
+  background-color: #fdd835;
+}
+
+.logo{
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
+}
+.link{
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  color: #ffff;
+}
+.link a {
+      font-weight: bold;
+      text-decoration: underline;
+      color: black;
+}
+.backbuton{
+  color: white;
+}
+.forgot-password a:link,
+.forgot-password a:visited,
+.forgot-password a:hover,
+.forgot-password a:active {
+  color: white !important;
+  text-decoration: underline; /* optional, to keep it visible */
+  cursor: pointer;
+}
+.back-to-login{
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  body {
+    background: none;
+  }
+
+  .login-box {
+    width: 70%;
+    padding: 20px;
+    box-shadow: none;
+  }
+  .logo {
+    height: 100%;
+
+  }
+  
+}

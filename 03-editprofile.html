@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="03-editprofile.css">
+  <link rel="stylesheet" href="00-nav.css">
+  <script src="00-nav.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="02-dashboard.html" class="logo"><img src="bpclogo.png" alt="Company Logo"></a>
+      <h1 id="school" style="user-select: none;">BULACAN POLYTECHNIC COLLEGE</h1>
+      <ul class="mainMenu">
+        <li><a href="02-dashboard.html">HOME</a></li>
+        <li><a href="04-manage.html">MANAGE EMPLOYEES</a></li>
+        <li><a href="06-attendance.html">ATTENDANCE</a></li>
+        <li><a href="05-calculation.html">PAYROLL</a></li>
+        <li class="active"><a href="07-profile.html">PROFILE</a></li>
+      </ul>
+      <div class="tootle-menu" onclick="toggleMenu()">&#9776;</div>
+    </nav>
+  </header>
+
+  <div class="form-box">
+    <h2>Edit Profile</h2>
+    <form onsubmit="return saveAdminProfile(event)">
+      <div class="input-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" required />
+      </div>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" required />
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required />
+      </div>
+      <button type="submit">Update</button>
+    </form>
+  </div>
+
+  <script>
+    window.onload = function () {
+      document.getElementById('name').value = localStorage.getItem('name') || '';
+      document.getElementById('username').value = localStorage.getItem('username') || '';
+      document.getElementById('password').value = localStorage.getItem('password') || '';
+    };
+    function saveAdminProfile(event) {
+      event.preventDefault();
+      localStorage.setItem('name', document.getElementById('name').value);
+      localStorage.setItem('username', document.getElementById('username').value);
+      localStorage.setItem('password', document.getElementById('password').value);
+      alert('Profile updated successfully!');
+      window.location.href = '02-dashboard.html';
+    }
+  </script>
+</body>
+</html>

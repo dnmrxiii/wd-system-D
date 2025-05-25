@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage employees</title>
+  <link rel="stylesheet" type="text/css" href="04-manage.css">
+  <link rel="stylesheet" href="00-nav.css">
+  <script src="00-nav.js"></script>
+  
+</head>
+<body>
+  <header>
+        <nav class="navbar">
+            <a href="02-dashboard.html" class="logo"><img src="bpclogo.png" alt="Company Logo"></a>
+            <h1 id="school" style="user-select: none;">BULACAN POLYTECHNIC COLLEGE</h1>
+            <ul class="mainMenu">
+                <li><a href="02-dashboard.html">HOME</a></li>
+                <li class="active"><a href="04-manage.html">MANAGE EMPLOYEES</a></li>
+                <li><a href="06-attendance.html">ATTENDANCE</a></li>
+                <li><a href="05-calculation.html">PAYROLL</a></li>
+                <li><a href="07-profile.html">PROFILE</a></li>
+            </ul>
+            <div class="tootle-menu" onclick="toggleMenu()">
+                &#9776;
+            </div>
+        </nav>
+    </header>
+  <div class="main">
+      <h1>MANAGE EMPLOYEES </h1>
+      
+    <div class="p1">
+      <form name="myform" id="myform">
+        <h3> Enter Employee Details: </h3>
+        <input type="text" id="name" placeholder="Employee Name">
+        <br><br>
+        <input type="text" id="job" placeholder="Job Designation">
+        <br><br>
+        <input type="text" id="dep" placeholder="Department">
+        <br><br>
+        <input type="number" id="daily" placeholder="Daily Rate">
+      </form>
+      <button id="btn1" onclick="submitform()"> Add Employee </button>
+    </div>
+    <div class="p2holder">
+      <h3> Employee List: </h3>
+      <div class="p2">
+        <table id="gradeTable">
+          <thead>
+            <tr>
+              <th> NAME </th>
+              <th> Job Designation </th>
+              <th> Department </th>
+              <th> Daily Rate </th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <button id="view-employee-list-btn" onclick="viewform()">View</button>
+    </div>
+  </div>
+  <footer class="bpc-footer">
+  <div class="footer-container">
+    <div class="footer-column logo-section">
+      <img src="bpclogo.png" alt="BPC Logo" class="bpc-logo" />
+    </div>
+
+    <div class="footer-column">
+      <h3>Social Links</h3>
+      <ul>
+        <li><i class='bx bxl-facebook-circle'></i> Facebook</li>
+        <li><i class='bx bxl-youtube'></i> Youtube</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Supports</h3>
+      <ul>
+        <li><i class='bx bx-right-arrow-circle'></i> FAQS</li>
+        <li><i class='bx bx-right-arrow-circle'></i> Privacy</li>
+        <li><i class='bx bx-right-arrow-circle'></i> Policies</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <ul>
+        <li><i class='bx bx-map'></i> Bulihan, City of Malolos, Bulacan</li>
+        <li><i class='bx bx-phone'></i> (044) 802 6716 / (044) 796 2306</li>
+        <li><i class='bx bx-envelope'></i> communications@bpc.edu.ph</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2024 Bulacan Polytechnic College. All rights reserved.</p>
+  </div>
+</footer>
+
+  <script>
+    function submitform() {
+    if (confirm('Are you sure you want to add data in the table?')) {
+        const name = document.getElementById('name').value;
+        const job = document.getElementById('job').value;
+        const dep = document.getElementById('dep').value;
+        const daily = parseFloat(document.getElementById('daily').value);
+
+        if (name && job && dep && !isNaN(daily)) {
+            const table = document.getElementById('gradeTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            newRow.insertCell(0).innerHTML = name;
+            newRow.insertCell(1).innerHTML = job;
+            newRow.insertCell(2).innerHTML = dep;
+            newRow.insertCell(3).innerHTML = daily;
+
+            saveEmployeeData();
+          document.getElementById('myform').reset();
+        } else {
+          alert("Please fill out all fields");
+        }
+      }
+    }
+    function saveEmployeeData() {
+    const table = document.getElementById('gradeTable');
+    const rows = table.rows;
+    let employeeData = [];
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.cells;
+        if (cells.length > 0) {
+            employeeData.push({
+                name: cells[0].innerHTML,
+                job: cells[1].innerHTML,
+                dep: cells[2].innerHTML,
+                daily: cells[3].innerHTML
+            });
+        }
+    }
+    localStorage.setItem("employeeData", JSON.stringify(employeeData));
+}
+    function getEmployeeData() {
+    const employeeData = localStorage.getItem("employeeData");
+    return employeeData ? JSON.parse(employeeData) : [];
+}
+
+    function viewform() {
+      const table = document.getElementById('gradeTable');
+      const rows = table.rows;
+      let employeeData = [];
+
+      for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.cells;
+        employeeData.push({
+          name: cells[0].innerHTML,
+          job: cells[1].innerHTML,
+          dep: cells[2].innerHTML,
+          daily: cells[3].innerHTML
+        });
+      }
+
+      localStorage.setItem("employeeData", JSON.stringify(employeeData));
+
+      window.location.href='view.html';
+    }
+    function loadEmployeeData() {
+  const employeeData = JSON.parse(localStorage.getItem("employeeData"));
+  if (employeeData) {
+    const table = document.getElementById('gradeTable').getElementsByTagName('tbody')[0];
+    employeeData.forEach(employee => {
+      const newRow = table.insertRow();
+      newRow.insertCell(0).innerHTML = employee.name;
+      newRow.insertCell(1).innerHTML = employee.job;
+      newRow.insertCell(2).innerHTML = employee.dep;
+      newRow.insertCell(3).innerHTML = employee.daily;
+    });
+  }
+}
+
+window.onload = loadEmployeeData;
+  </script>
+</body>
+</html>

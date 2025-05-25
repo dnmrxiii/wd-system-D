@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1 0 auto;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.welcome-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.welcome-section h2 {
+  font-size: 2.8rem;
+  color: #0d6217;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.welcome-section p {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.quick-links h3 {
+  font-size: 2rem;
+  color: #0d6217;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.link-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  color: #0d6217;
+  text-decoration: none;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.link-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+}
+
+.link-card .icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+.link-card h4 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.link-card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.bpc-footer {
+  background-color: #0d6217;
+  color: white;
+  padding: 50px 20px 20px;
+  font-family: 'Poppins', Arial, sans-serif;
+  flex-shrink: 0;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  gap: 30px;
+}
+
+.footer-column {
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+
+.footer-column h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: white;
+}
+
+.footer-column i {
+  font-size: 20px;
+  color: #ffeb3b;
+  user-select: none;
+}
+
+.logo-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bpc-logo {
+  max-width: 110px;
+  height: auto;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 15px;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+@media (max-width: 768px) {
+  .tootle-menu {
+    display: block;
+    margin-left: auto;
+  }
+
+  .mainMenu {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    margin-top: 10px;
+    background-color: #0B6623;
+    border-radius: 5px;
+    padding: 10px 0;
+  }
+  .mainMenu.active {
+    display: flex;
+  }
+  .tootle-menu {
+    display: block;
+  }
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-column {
+    margin: 15px 0;
+  }
+  .footer-column {
+    min-width: auto;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  .link-card {
+    padding: 25px 15px;
+  }
+}

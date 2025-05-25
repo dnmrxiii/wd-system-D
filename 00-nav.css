@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Inter;
+}
+
+body {
+    background-color: #fff;
+}
+
+header {
+    background: linear-gradient(to right, #0B6623, #16CC46);
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px; 
+}
+
+header a {
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav h1 {
+    color: #F3D90B;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 20px;
+    user-select: none;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0; 
+    margin: 0; 
+}
+
+nav ul li {
+    margin: 0 15px;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+nav ul li:hover {
+    color: #F3D90B;
+}
+
+nav ul li a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #F3D90B;
+}
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: #ffd000;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li.active a {
+    color: #F3D90B !important;
+}
+
+nav a.active li {
+    color: #F3D90B !important;
+    padding-bottom: 2px;
+    transition: border-bottom-color 0.3s ease;
+}
+
+nav a.active li:hover {
+    border-bottom-color: #F3D90B;
+}
+
+nav a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: #ffd000;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a.logo:hover::after {
+    width: 0;
+}
+
+img {
+    width: 7.5em;
+    height: auto;
+}
+
+/* Burger */
+.tootle-menu {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+    font-weight: 800;
+}
+.tootle-menu:hover {
+    color: #F3D90B;
+}
+
+/* phone */
+@media (max-width: 720px) {
+
+    .tootle-menu {
+        display: block;
+    }
+
+    header {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    nav {
+        padding: 10px;
+        flex-direction: row;
+        align-items: center;
+        display: flex;
+    }
+
+    nav #school {
+        font-size: 0.9em ;
+        padding: 2%;
+    }
+
+    nav .logo img {
+        width: 3em;
+        height: auto;
+    }
+
+
+    .mainMenu {
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        top: 10%;
+        left: 0;
+        background: linear-gradient(to right, #0B6623, #16CC46);
+        padding: 10px 0;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        gap: 10px;
+        z-index: 100;
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .mainMenu.active {
+        opacity: 0.9;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+
